@@ -11,51 +11,23 @@
     </nav>
     <ol class="panels">
       <li v-for="(item,index) in resume" v-show="currentTab===index">
-        <div v-for="subItem in item">
-          <label>{{subItem.key}}</label>
-          <input type="text" :value="subItem.value">
+        <div v-if="item instanceof  Array">
+          <div v-for="subItem in item">
+            <div v-for="(value,key) in subItem">
+              <label>{{key}}</label>
+              <input type="text" :value="value">
+            </div>
+            <hr>
+          </div>
+          <el-button @click="add()" type="primary">增加</el-button>
+        </div>
+        <div v-else>
+          <div v-for="(value,key) in item">
+            <label>{{key}}</label>
+            <input type="text" :value="value">
+          </div>
         </div>
       </li>
-      <!--<li v-show="currentTab===0">-->
-        <!--<div v-for="(item,key) in profile">-->
-          <!--<label>{{key}}</label>-->
-          <!--<input type="text" :value="profile[key]">-->
-        <!--</div>-->
-      <!--</li>-->
-      <!--<li v-show="currentTab===1">-->
-        <!--<div v-for="item in company">-->
-          <!--<label>{{item.key}}</label>-->
-          <!--<input type="text" :value="item.value">-->
-        <!--</div>-->
-        <!--<hr>-->
-      <!--</li>-->
-      <!--<li v-show="currentTab===2">-->
-        <!--<div v-for="item in school">-->
-          <!--<label>{{item.key}}</label>-->
-          <!--<input type="text" :value="item.value">-->
-        <!--</div>-->
-        <!--<hr>-->
-      <!--</li>-->
-      <!--<li v-show="currentTab===3">-->
-        <!--<div v-for="item in projects">-->
-          <!--<label>{{item.key}}</label>-->
-          <!--<input type="text" :value="item.value">-->
-        <!--</div>-->
-        <!--<hr>-->
-      <!--</li>-->
-      <!--<li v-show="currentTab===4">-->
-        <!--<div v-for="item in awards">-->
-          <!--<label>{{item.key}}</label>-->
-          <!--<input type="text" :value="item.value">-->
-        <!--</div>-->
-        <!--<hr>-->
-      <!--</li>-->
-      <!--<li v-show="currentTab===5">-->
-        <!--<div v-for="item in contacts">-->
-          <!--<label>{{item.key}}</label>-->
-          <!--<input type="text" :value="item.value">-->
-        <!--</div>-->
-      <!--</li>-->
     </ol>
   </div>
 </template>
@@ -66,38 +38,36 @@
     data: function () {
       return {
         currentTab: 'profile',
-        svgIds:['id','work','book','heart','cup','phone'],
+        svgIds: ['id', 'work', 'book', 'heart', 'cup', 'phone'],
         resume: {
           config: [
-            'profile','company','school','projects','awards','contacts'
+            'profile', 'company', 'school', 'projects', 'awards', 'contacts'
           ],
-          profile: [
-            {key: 'name', value: 'swh'},
-            {key: 'birth', value: '1994-7-27'},
-            {key: 'gender', value: '男'},
-            {key: 'city', value: '杭州'}
-          ],
+          profile: {'name': 'swh', 'birth': '1994-7-27', 'city': '杭州'}
+          ,
           company: [
-            {key: 'company', value: '1+1'},
-            {key: 'content', value: '=2'}
+            {'company': '1+1', 'content': '=2'},
+            {'company': 'fdaf', 'content': 'fda3fd'}
           ],
           school: [
-            {key: 'school', value: '嘻嘻哈哈'},
-            {key: 'content', value: '1234'}
+            {'school': 'xixihahh', 'content': '1234'}
           ],
           projects: [
-            {key: 'name', value: '在线简历编辑器'},
-            {key: 'content', value: '项目介绍'}
+            {name: '在线简历编辑器', 'content': '项目介绍'}
           ],
           awards: [
-            {key: 'name', value: 'xxx'},
-            {key: 'content', value: 'abcd'}
+            {'name': 'xxx', 'content': 'abcd'}
           ],
           contacts: [
-            {key: 'contact', value: '电话'},
-            {key: 'content', value: '123321456654'}
+            {'contact': 'phone', 'content': '15757821491'},
+            {'contact': 'qq', 'content': '443878051'}
           ]
         }
+      }
+    },
+    methods: {
+      add(){
+          console.log(this)
       }
     }
   }
@@ -144,7 +114,7 @@
       flex: 1;
       li {
         padding: 24px;
-        div{
+        div {
           margin-bottom: 16px;
           label {
             display: block;
@@ -155,10 +125,11 @@
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.25)
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25)
           }
         }
         hr {
+          border-color: #eee;
           margin-top: 24px;
         }
       }
