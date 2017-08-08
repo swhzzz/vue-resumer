@@ -67,7 +67,13 @@
     },
     methods: {
       add(){
-          console.log(this)
+        let type = this.currentTab,
+          tabObj = this.resume[type][0],//获取company,school里面的对象
+          keys = Object.keys(tabObj);
+        let obj ={};
+        obj[keys[0]]= ''
+        obj[keys[1]]= ''
+        this.resume[type].push(obj)
       }
     }
   }
@@ -112,6 +118,7 @@
     }
     .panels {
       flex: 1;
+      overflow: auto;
       li {
         padding: 24px;
         div {
