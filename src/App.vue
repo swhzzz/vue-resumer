@@ -11,34 +11,42 @@
 </template>
 
 <script>
-import 'normalize.css/normalize.css'
-import './assets/reset.css'
+  import 'normalize.css/normalize.css'
+  import './assets/reset.css'
 
-import Topbar from './components/Topbar'
-import ResumeEditor from './components/ResumeEditor'
-import ResumePreview from './components/ResumePreview'
-import icons from './assets/icons'
+  import Topbar from './components/Topbar'
+  import ResumeEditor from './components/ResumeEditor'
+  import ResumePreview from './components/ResumePreview'
+  import icons from './assets/icons'
 
-export default {
-  name: 'app',
-  components: {
-    Topbar,
-    ResumeEditor,
-    ResumePreview
-  },
-  created: function() {
-    document.body.insertAdjacentHTML('afterbegin', icons)//插入一段HTML，放在body标签的首部
+  import store from './store/index'
+  import {mapState, mapMutations} from 'vuex'
+
+  export default {
+    name: 'app',
+    store,
+//    computed: {
+//    },
+//    methods: {
+//    },
+    components: {
+      Topbar,
+      ResumeEditor,
+      ResumePreview
+    },
+    created: function () {
+      document.body.insertAdjacentHTML('afterbegin', icons)//插入一段HTML，放在body标签的首部
+    }
   }
-}
 </script>
 
 <style lang="scss">
-  .page{
+  .page {
     height: 100vh;
     display: flex;
     flex-direction: column;
     background: #EAEBEC;
-    >main{
+    > main {
       min-width: 1024px;
       max-width: 1440px;
       margin-top: 16px;
@@ -51,11 +59,13 @@ export default {
       padding: 0 16px;
     }
   }
-  #resumeEditor{
+
+  #resumeEditor {
     width: 35%;
     background: #444;
   }
-  #resumePreview{
+
+  #resumePreview {
     width: 61.66667%;
     background: #777;
     flex: 1;
