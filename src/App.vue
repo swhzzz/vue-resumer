@@ -25,17 +25,18 @@
   export default {
     name: 'app',
     store,
-//    computed: {
-//    },
-//    methods: {
-//    },
     components: {
       Topbar,
       ResumeEditor,
       ResumePreview
     },
     created: function () {
-      document.body.insertAdjacentHTML('afterbegin', icons)//插入一段HTML，放在body标签的首部
+      document.body.insertAdjacentHTML('afterbegin', icons);//插入一段HTML，放在body标签的首部
+      let state= localStorage.getItem('state');
+      if(state){
+          state=JSON.parse(state)
+      }
+      store.commit('initState',state)
     }
   }
 </script>

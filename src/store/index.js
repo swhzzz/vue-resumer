@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import Vuex from 'vuex';
+import Vuex from 'vuex'
+import objectPath from 'object-path'
 
 Vue.use(Vuex);
 const store = new Vuex.Store({
@@ -8,22 +9,22 @@ const store = new Vuex.Store({
     svgIds: ['id', 'work', 'book', 'heart', 'cup', 'phone'],
     resume: {
       config: [
-        'profile', 'company', 'school', 'projects', 'awards', 'contacts'
+        'profile', 'workHistory', 'education', 'projects', 'awards', 'contacts'
       ],
-      profile: {'name': 'swh', 'birth': '1994-7-27', 'city': '杭州'}
+      profile: {'name': '沈文豪','title': '前端工程师' ,'city': '杭州','birth': '1994-7-27'}
       ,
-      company: [
+      workHistory: [
         {'company': '1+1', 'content': '=2'},
         {'company': 'fdaf', 'content': 'fda3fd'}
       ],
-      school: [
-        {'school': 'xixihahh', 'content': '1234'}
+      education: [
+        {'school': '加里敦大学', 'content': '1234'}
       ],
       projects: [
-        {name: '在线简历编辑器', 'content': '项目介绍'}
+        {'name': '项目名称', 'content': '项目介绍'}
       ],
       awards: [
-        {'name': 'xxx', 'content': 'abcd'}
+        {'name': 'xxx', 'content': '再来一瓶'}
       ],
       contacts: [
         {'contact': 'phone', 'content': '15757821491'},
@@ -32,8 +33,16 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    initState(state,payload){
+      Object.assign(state,payload)
+    },
     switchTab(state, value){
-      state.currentTab = value
+      state.currentTab = value;
+      localStorage.setItem('state',JSON.stringify(state))
+    },
+    updateResume(state,{path,value}){
+      objectPath.set(state.resume,path,value);
+      localStorage.setItem('state',JSON.stringify(state))
     }
   }
 });
