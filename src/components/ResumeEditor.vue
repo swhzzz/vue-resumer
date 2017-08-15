@@ -19,7 +19,7 @@
             </div>
             <hr>
           </div>
-          <el-button @click="add()" type="primary">增加</el-button>
+          <el-button @click="add()" type="primary">add</el-button>
         </div>
         <div v-else>
           <div v-for="(value,key) in item">

@@ -7,11 +7,15 @@ const store = new Vuex.Store({
   state: {
     currentTab: 'profile',
     svgIds: ['id', 'work', 'book', 'heart', 'cup', 'phone'],
+    user: {
+      username: '',
+      id: ''
+    },
     resume: {
       config: [
         'profile', 'workHistory', 'education', 'projects', 'awards', 'contacts'
       ],
-      profile: {'name': '沈文豪','title': '前端工程师' ,'city': '杭州','birth': '1994-7-27'}
+      profile: {'name': '沈文豪', 'title': '前端工程师', 'city': '杭州', 'birth': '1994-7-27'}
       ,
       workHistory: [
         {'company': '1+1', 'content': '=2'},
@@ -33,16 +37,23 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    initState(state,payload){
-      Object.assign(state,payload)
+    initState(state, payload){
+      Object.assign(state, payload)
     },
     switchTab(state, value){
       state.currentTab = value;
-      localStorage.setItem('state',JSON.stringify(state))
+      localStorage.setItem('state', JSON.stringify(state))
     },
-    updateResume(state,{path,value}){
-      objectPath.set(state.resume,path,value);
-      localStorage.setItem('state',JSON.stringify(state))
+    updateResume(state, {path, value}){
+      objectPath.set(state.resume, path, value);
+      localStorage.setItem('state', JSON.stringify(state))
+    },
+    setUser(state, payload){
+      Object.assign(state.user, payload);
+      // console.log(state.user)
+    },
+    removeUser(state){
+      state.user.id = null
     }
   }
 });
