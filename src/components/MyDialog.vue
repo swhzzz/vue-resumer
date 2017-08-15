@@ -2,7 +2,7 @@
   <div class="wrapper" v-show="visible">
     <div class="dialog">
       <header>{{title}}
-        <span class="close" @click="close">x</span>
+        <span class="close" @click="close">X</span>
       </header>
       <main>
         <slot></slot>
@@ -13,7 +13,6 @@
 
 <script>
   export default {
-    name: 'dialog',
     props: ['title', 'visible'],
     methods: {
       close(){

@@ -65,9 +65,6 @@
     name: 'ResumePreview',
     computed: {
       ...mapState(['resume'])
-    },
-    created(){
-//      console.log(this.resume)
     }
   }
 </script>

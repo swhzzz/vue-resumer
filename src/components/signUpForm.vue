@@ -3,7 +3,7 @@
     <form @submit.prevent="signUp">
       <div class="row">
         <label>用户名
-          <input type="text" v-model="formData.username" required>
+          <input v-model="formData.username" required>
           <!--required表示提交表单时input不能为空，必须有值-->
         </label>
       </div>
@@ -52,3 +52,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .row{
+    margin-bottom: 16px;
+  }
+</style>
