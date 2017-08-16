@@ -79,11 +79,11 @@
         let user = new AV.User();
         user.setUsername(username);
         user.setPassword(password);
-        user.signUp().then((loginedUser)=>{
-          console.log(loginedUser)
+        user.signUp().then(()=>{
           this.success()
         },(error)=> {
-          this.errorMsg=getErrorMessage(error)
+          this.errorMsg=getErrorMessage(error);
+          this.fail(this.errorMsg)
         });
         store.commit('setUser', user)
       },
@@ -91,9 +91,8 @@
         this.logInDialogVisible=false;
         let {username,password} = this.formData;
         AV.User.logIn(username,password).then(()=>{
-          console.log(1)
         },(error)=> {
-          this.errorMsg=getErrorMessage(error)
+          this.errorMsg=getErrorMessage(error);
           this.fail(this.errorMsg)
         });
         store.commit('setUser', user)
