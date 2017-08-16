@@ -1,21 +1,17 @@
 <template>
   <div>
     <form @submit.prevent="signUp">
-      <div class="row">
-        <label>用户名
-          <input v-model="formData.username" required>
-          <!--required表示提交表单时input不能为空，必须有值-->
-        </label>
-      </div>
-      <div class="row">
-        <label>密&nbsp;&nbsp;&nbsp;码
-          <input type="password" v-model="formData.password" required>
-        </label>
-      </div>
-      <div class="actions">
-        <input type="submit" value="提交">
-        <span>{{errorMessage}}</span>
-      </div>
+      {{visible}}
+      <el-dialog
+        title="提示"
+        :visible.sync="visible"
+        size="tiny">
+        <span>这是一段信息</span>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="visible = false">取 消</el-button>
+    <el-button type="primary" @click="visible = false">确 定</el-button>
+  </span>
+      </el-dialog>
     </form>
   </div>
 </template>
@@ -27,23 +23,24 @@
 
   export default {
     name: 'signUpForm',
-    data(){
+    props: ['visible'],
+    data() {
       return {
         formData: {
-          username: '',
+          username: '11',
           password: ''
         },
-        errorMessage: ''
+        errorMessage: '',
       }
     },
     methods: {
-      signUp(){
+      signUp() {
         let {username, password} = this.formData;
         let user = new AV.User();
         user.setUsername(username);
         user.setPassword(password);
         user.signUp().then(() => {
-          this.$emit('success',getAVUser())
+          this.$emit('success', getAVUser())
         }, (error) => {
           console.log(error);
           this.errorMessage = getErrorMessage(error)
@@ -54,7 +51,7 @@
 </script>
 
 <style scoped>
-  .row{
+  .row {
     margin-bottom: 16px;
   }
 </style>
