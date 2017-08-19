@@ -48,23 +48,32 @@
     </section>
     <section data-name="contacts" v-show="resume.contacts">
       <h2>联系方式</h2>
-        <table>
-          <tr v-for="item in resume.contacts">
-            <td>{{item.contact}}</td>
-            <td v-show="item.content">{{item.content}}</td>
-          </tr>
-        </table>
+      <table>
+        <tr v-for="item in resume.contacts">
+          <td>{{item.contact}}</td>
+          <td v-show="item.content">{{item.content}}</td>
+        </tr>
+      </table>
     </section>
+    <transition name="exitPreviewBtnFade">
+      <el-button @click="exit" type="primary" class="btn exit" v-if="exitBtnShow">退出预览</el-button>
+    </transition>
   </div>
 </template>
 
 <script>
   import store from '../store/index'
   import {mapState} from 'vuex'
+
   export default {
     name: 'ResumePreview',
     computed: {
-      ...mapState(['resume'])
+      ...mapState(['resume', 'exitBtnShow'])
+    },
+    methods: {
+      exit() {
+        store.commit('exitPreview')
+      }
     }
   }
 </script>
@@ -127,6 +136,20 @@
       td:first-child {
         padding-right: 1em;
       }
+    }
+    .exit {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+    }
+    .exitPreviewBtnFade-enter,
+    .exitPreviewBtnFade-leave-to {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    .exitPreviewBtnFade-enter-active,
+    .exitPreviewBtnFade-leave-active{
+      transition: all 1s;
     }
   }
 </style>

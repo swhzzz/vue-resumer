@@ -5,6 +5,10 @@ import objectPath from 'object-path'
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
+    topBarShow: false,
+    previewShow: false,
+    editorShow: false,
+    exitBtnShow: false,
     currentTab: 'profile',
     svgIds: ['id', 'work', 'book', 'heart', 'cup', 'phone'],
     user: {
@@ -28,33 +32,38 @@ const store = new Vuex.Store({
         {'name': '项目名称', 'content': '项目介绍'}
       ],
       awards: [
-        {'name': 'xxx', 'content': '再来一瓶'}
+        {'name': '获奖名称', 'content': '连续N次谢谢惠顾'}
       ],
       contacts: [
-        {'contact': 'phone', 'content': '15757821491'},
+        {'contact': 'phone', 'content': '15712234567'},
         {'contact': 'qq', 'content': '443878051'}
       ]
     }
   },
   mutations: {
-    initState(state, payload){
+    initState(state, payload) {
       Object.assign(state, payload)
     },
-    switchTab(state, value){
+    switchTab(state, value) {
       state.currentTab = value;
       localStorage.setItem('state', JSON.stringify(state))
     },
-    updateResume(state, {path, value}){
+    updateResume(state, {path, value}) {
       objectPath.set(state.resume, path, value);
       localStorage.setItem('state', JSON.stringify(state))
     },
-    setUser(state, payload){
+    setUser(state, payload) {
       Object.assign(state.user, payload);
       console.log(state.user)
     },
-    removeUser(state){
+    removeUser(state) {
       state.user.id = '';
       console.log('remove')
+    },
+    exitPreview(state) {
+      state.exitBtnShow = false;
+      state.topBarShow = true;
+      state.editorShow = true;
     }
   }
 });

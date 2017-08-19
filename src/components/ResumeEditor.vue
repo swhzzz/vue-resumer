@@ -15,7 +15,8 @@
           <div v-for="(subItem,i) in item">
             <div v-for="(value,key) in subItem">
               <label>{{key}}</label>
-              <input type="text" :value="value" @input="changeResume(`${currentTab}.${i}.${key}`,$event.target.value)">
+              <input type="text" :value="value"
+                     @input="changeResume(`${currentTab}.${i}.${key}`,$event.target.value)">
             </div>
             <hr>
           </div>
@@ -35,21 +36,22 @@
 <script>
   import store from '../store/index'
   import {mapState} from 'vuex'
+
   export default {
     name: 'ResumeEditor',
     computed: {
-      ...mapState(['resume', 'svgIds']),
+      ...mapState(['resume', 'svgIds', 'shows']),
       currentTab: {
-        get(){
+        get () {
           return store.state.currentTab
         },
-        set(value){
+        set (value) {
           store.commit('switchTab', value)
         }
       }
     },
     methods: {
-      add(){
+      add() {
         let type = this.currentTab,
           tabObj = this.resume[type][0],//获取company,school里面的对象
           keys = Object.keys(tabObj);
@@ -57,9 +59,14 @@
         obj[keys[0]] = '';
         obj[keys[1]] = '';
         this.resume[type].push(obj)
+        //触发添加动画
+//        store.state.shows.push(false)
+//        let length = store.state.shows.length
+//        store.state.shows[length - 1] = true
+//        console.log(store.state.shows)
       },
-      changeResume(path,value){
-        store.commit('updateResume',{path,value})
+      changeResume(path, value) {
+        store.commit('updateResume', {path, value})
       }
     }
   }
@@ -129,6 +136,13 @@
     }
   }
 
+  /*.xxx-enter,*/
+  /*.xxx-leave-to {*/
+    /*opacity: 0;*/
+  /*}*/
 
+  /*.xxx-enter-active {*/
+    /*transition: all 1s;*/
+  /*}*/
 </style>
 

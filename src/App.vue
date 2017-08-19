@@ -10,13 +10,14 @@
         <ResumeEditor v-if="editorShow"></ResumeEditor>
       </transition>
       <transition name="slide-right">
-        <ResumePreview v-if="previewShow"></ResumePreview>
+        <ResumePreview v-if="previewShow" ></ResumePreview>
       </transition>
     </main>
   </div>
 </template>
 
 <script>
+  import 'animate.css'
   import 'normalize.css/normalize.css'
   import './assets/reset.css'
 
@@ -33,12 +34,8 @@
   export default {
     name: 'app',
     store,
-    data() {
-      return {
-        topBarShow: false,
-        previewShow: false,
-        editorShow: false
-      }
+    computed: {
+      ...mapState(['topBarShow', 'editorShow', 'previewShow','xx'])
     },
     components: {
       Topbar,
@@ -47,9 +44,9 @@
     },
     created: function () {
       setTimeout(() => {
-        this.topBarShow = true;
-          this.editorShow = true;
-          this.previewShow = true
+        this.$store.state.topBarShow = true;
+        this.$store.state.editorShow = true;
+        this.$store.state.previewShow = true;
       }, 1);
       document.body.insertAdjacentHTML('afterbegin', icons);//插入icons，放在body标签的首部
       let state = localStorage.getItem('state');//获取数据
@@ -107,25 +104,35 @@
     transition: all 1s 1s;
   }
 
-  /*.slide-top-leave-active {*/
-    /*transition: all 1.5s;*/
-  /*}*/
-  .slide-left-enter ,
-  .slide-left-leave-to{
-    opacity: 0;
-    transform:translateX(-20%);
-  }
-  .slide-left-enter-active
-  {
+  .slide-top-leave-active {
     transition: all 1s;
   }
 
-  .slide-right-enter ,
-  .slide-right-leave-to{
+  .slide-left-enter,
+  .slide-left-leave-to {
     opacity: 0;
-    transform:translateX(20%);
+    transform: translateX(-20%);
   }
+
+  .slide-left-enter-active {
+    transition: all 1s;
+  }
+
+  .slide-left-leave-active {
+    transition: all 1s;
+  }
+
+  .slide-right-enter,
+  .slide-right-leave-to {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+
   .slide-right-enter-active {
-     transition: all 1s .5s;
-   }
+    transition: all 1s .5s;
+  }
+
+  .slide-right-leave-active {
+    transition: all 1s;
+  }
 </style>

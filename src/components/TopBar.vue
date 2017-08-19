@@ -39,7 +39,7 @@
             </span>
           </el-dialog>
         </div>
-        <el-button class="btn" type="primary">Preview</el-button>
+        <el-button @click="preview" class="btn" type="primary">预览</el-button>
       </div>
     </div>
   </div>
@@ -81,21 +81,23 @@
         user.setPassword(password);
         user.signUp().then(()=>{
           this.success()
+          store.commit('setUser', user)
         },(error)=> {
           this.errorMsg=getErrorMessage(error);
           this.fail(this.errorMsg)
         });
-        store.commit('setUser', user)
+
       },
       logIn(user) {
         this.logInDialogVisible=false;
         let {username,password} = this.formData;
         AV.User.logIn(username,password).then(()=>{
+          store.commit('setUser', user)
         },(error)=> {
           this.errorMsg=getErrorMessage(error);
           this.fail(this.errorMsg)
         });
-        store.commit('setUser', user)
+
       },
       logOut() {
         AV.User.logOut();
@@ -114,6 +116,11 @@
           message: `${msg}:(`,
           type: 'warning'
         });
+      },
+      preview(){
+        this.$store.state.topBarShow=false;
+        this.$store.state.editorShow=false;
+        this.$store.state.exitBtnShow=true;
       }
     }
   }
