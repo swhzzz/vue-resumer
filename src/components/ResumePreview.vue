@@ -62,7 +62,6 @@
 </template>
 
 <script>
-  import store from '../store/index'
   import {mapState} from 'vuex'
 
   export default {
@@ -72,7 +71,7 @@
     },
     methods: {
       exit() {
-        store.commit('exitPreview')
+        this.$store.commit('exitPreview')
       }
     }
   }

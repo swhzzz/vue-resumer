@@ -34,7 +34,6 @@
 </template>
 
 <script>
-  import store from '../store/index'
   import {mapState} from 'vuex'
 
   export default {
@@ -43,10 +42,10 @@
       ...mapState(['resume', 'svgIds', 'shows']),
       currentTab: {
         get () {
-          return store.state.currentTab
+          return this.$store.state.currentTab
         },
         set (value) {
-          store.commit('switchTab', value)
+          this.$store.commit('switchTab', value)
         }
       }
     },
@@ -66,7 +65,7 @@
 //        console.log(store.state.shows)
       },
       changeResume(path, value) {
-        store.commit('updateResume', {path, value})
+        this.$store.commit('updateResume', {path, value})
       }
     }
   }

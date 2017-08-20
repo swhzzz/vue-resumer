@@ -4,7 +4,7 @@
       <span class="logo">Resumer</span>
       <div class="actions">
         <div v-if="logined" class="userActions">
-          <span>Hello，{{user.username}}</span>
+          <span>Hello，{{username}}</span>
           <el-button class="btn" @click="logOut">LogOut</el-button>
         </div>
         <div v-else class="userActions">
@@ -46,7 +46,6 @@
 </template>
 
 <script>
-  import store from '../store/index'
   import AV from '../lib/leancloud'
   import getErrorMessage from '../lib/getErrorMessage'
 
@@ -60,16 +59,17 @@
         },
         signUpDialogVisible: false,
         logInDialogVisible: false,
-        id: store.state.user.id,
-        errorMsg: ''
       }
     },
     computed: {
-      user() {
-        return store.state.user
+//      user(){
+//        return this.$store.state.user
+//      },
+      username(){
+        return this.$store.state.user.username
       },
       logined() {
-        return this.user.id
+        return this.$store.state.user.id
       }
     },
     methods: {
@@ -80,8 +80,11 @@
         user.setUsername(username);
         user.setPassword(password);
         user.signUp().then(()=>{
-          this.success()
-          store.commit('setUser', user)
+          this.success();
+//          console.log(user)
+          this.$store.commit('setUser', user)
+          console.log(1,user)
+//          console.log(store.state.user.username)
         },(error)=> {
           this.errorMsg=getErrorMessage(error);
           this.fail(this.errorMsg)
@@ -92,7 +95,7 @@
         this.logInDialogVisible=false;
         let {username,password} = this.formData;
         AV.User.logIn(username,password).then(()=>{
-          store.commit('setUser', user)
+          this.$store.commit('setUser', user)
         },(error)=> {
           this.errorMsg=getErrorMessage(error);
           this.fail(this.errorMsg)
@@ -101,7 +104,7 @@
       },
       logOut() {
         AV.User.logOut();
-        store.commit('removeUser')
+        this.$store.commit('removeUser')
       },
       success() {
         this.$notify({

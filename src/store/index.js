@@ -22,11 +22,11 @@ const store = new Vuex.Store({
       profile: {'name': '沈文豪', 'title': '前端工程师', 'city': '杭州', 'birth': '1994-7-27'}
       ,
       workHistory: [
-        {'company': '1+1', 'content': '=2'},
-        {'company': 'fdaf', 'content': 'fda3fd'}
+        {'company': '工作经历1', 'content': '内容描述'},
+        {'company': '工作经历2', 'content': '内容描述'}
       ],
       education: [
-        {'school': '加里敦大学', 'content': '1234'}
+        {'school': '学校名称', 'content': '学校描述'}
       ],
       projects: [
         {'name': '项目名称', 'content': '项目介绍'}
@@ -54,11 +54,11 @@ const store = new Vuex.Store({
     },
     setUser(state, payload) {
       Object.assign(state.user, payload);
-      console.log(state.user)
+      // console.log(store.state)
+      console.log(2,state.user)
     },
     removeUser(state) {
       state.user.id = '';
-      console.log('remove')
     },
     exitPreview(state) {
       state.exitBtnShow = false;
