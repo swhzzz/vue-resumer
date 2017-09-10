@@ -12,15 +12,16 @@
     <ol class="panels">
       <li v-for="(item,index) in resume" v-show="currentTab===index">
         <div v-if="item instanceof  Array">
-          <div v-for="(subItem,i) in item">
-            <div v-for="(value,key) in subItem">
+          <div class="item-wrap" v-for="(subItem,i) in item">
+            <div v-for="(value,key,index) in subItem">
               <label>{{key}}</label>
               <input type="text" :value="value"
                      @input="changeResume(`${currentTab}.${i}.${key}`,$event.target.value)">
             </div>
+            <i class="del-btn el-icon-circle-cross"  v-if="item.length>1" @click="handleDelete(i)"></i>
             <hr>
           </div>
-          <el-button @click="add()" type="primary">add</el-button>
+          <el-button  @click="add()" type="primary">add</el-button>
         </div>
         <div v-else>
           <div v-for="(value,key) in item">
@@ -55,14 +56,16 @@
           tabObj = this.resume[type][0],//获取company,school里面的对象
           keys = Object.keys(tabObj);
         let obj = {};
-        obj[keys[0]] = '';
-        obj[keys[1]] = '';
+        keys.map((item)=>{obj[item]=''})
         this.resume[type].push(obj)
         //触发添加动画
 //        store.state.shows.push(false)
 //        let length = store.state.shows.length
 //        store.state.shows[length - 1] = true
 //        console.log(store.state.shows)
+      },
+      handleDelete(index){
+        this.$store.commit('deleteItem',index)
       },
       changeResume(path, value) {
         this.$store.commit('updateResume', {path, value})
@@ -105,7 +108,16 @@
           &.active {
             background-color: #fff;
           }
+
         }
+      }
+    }
+    .item-wrap{
+      position: relative;
+      .del-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
       }
     }
     .panels {
@@ -137,11 +149,11 @@
 
   /*.xxx-enter,*/
   /*.xxx-leave-to {*/
-    /*opacity: 0;*/
+  /*opacity: 0;*/
   /*}*/
 
   /*.xxx-enter-active {*/
-    /*transition: all 1s;*/
+  /*transition: all 1s;*/
   /*}*/
 </style>
 

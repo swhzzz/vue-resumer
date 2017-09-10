@@ -35,7 +35,7 @@ const store = new Vuex.Store({
         {'name': '获奖名称', 'content': '连续N次谢谢惠顾'}
       ],
       contacts: [
-        {'contact': 'phone', 'content': '15712234567'},
+        {'contact': 'phone', 'content': '15757821491'},
         {'contact': 'qq', 'content': '443878051'}
       ]
     }
@@ -51,6 +51,10 @@ const store = new Vuex.Store({
     updateResume(state, {path, value}) {
       objectPath.set(state.resume, path, value);
       localStorage.setItem('state', JSON.stringify(state))
+    },
+    deleteItem(state,index){
+      state.resume[state.currentTab].splice(index,1)
+      localStorage.setItem('state',JSON.stringify(state))
     },
     setUser(state, payload) {
       Object.assign(state.user, payload);

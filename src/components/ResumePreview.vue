@@ -138,8 +138,8 @@
     }
     .exit {
       position: fixed;
-      bottom: 32px;
-      right: 32px;
+      top: 32px;
+      right: 16px;
     }
     .exitPreviewBtnFade-enter,
     .exitPreviewBtnFade-leave-to {

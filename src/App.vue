@@ -88,7 +88,7 @@
   }
 
   #resumePreview {
-    width: 61.66667%;
+    /*width: 61.66667%;*/
     background: #777;
     flex: 1;
     margin-left: 16px;
