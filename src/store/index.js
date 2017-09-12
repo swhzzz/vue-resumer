@@ -52,14 +52,14 @@ const store = new Vuex.Store({
       objectPath.set(state.resume, path, value);
       localStorage.setItem('state', JSON.stringify(state))
     },
-    deleteItem(state,index){
-      state.resume[state.currentTab].splice(index,1)
-      localStorage.setItem('state',JSON.stringify(state))
+    deleteItem(state, index) {
+      state.resume[state.currentTab].splice(index, 1)
+      localStorage.setItem('state', JSON.stringify(state))
     },
     setUser(state, payload) {
       Object.assign(state.user, payload);
       // console.log(store.state)
-      console.log(2,state.user)
+      console.log(2, state.user)
     },
     removeUser(state) {
       state.user.id = '';

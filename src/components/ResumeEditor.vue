@@ -18,10 +18,10 @@
               <input type="text" :value="value"
                      @input="changeResume(`${currentTab}.${i}.${key}`,$event.target.value)">
             </div>
-            <i class="del-btn el-icon-circle-cross"  v-if="item.length>1" @click="handleDelete(i)"></i>
+            <i class="del-btn el-icon-circle-cross" v-if="item.length>1" @click="handleDelete(i)"></i>
             <hr>
           </div>
-          <el-button  @click="add()" type="primary">add</el-button>
+          <el-button @click="add()" type="primary">add</el-button>
         </div>
         <div v-else>
           <div v-for="(value,key) in item">
@@ -56,16 +56,13 @@
           tabObj = this.resume[type][0],//获取company,school里面的对象
           keys = Object.keys(tabObj);
         let obj = {};
-        keys.map((item)=>{obj[item]=''})
+        keys.map((item) => {
+          obj[item] = ''
+        })
         this.resume[type].push(obj)
-        //触发添加动画
-//        store.state.shows.push(false)
-//        let length = store.state.shows.length
-//        store.state.shows[length - 1] = true
-//        console.log(store.state.shows)
       },
-      handleDelete(index){
-        this.$store.commit('deleteItem',index)
+      handleDelete(index) {
+        this.$store.commit('deleteItem', index)
       },
       changeResume(path, value) {
         this.$store.commit('updateResume', {path, value})
@@ -112,7 +109,7 @@
         }
       }
     }
-    .item-wrap{
+    .item-wrap {
       position: relative;
       .del-btn {
         position: absolute;
@@ -147,13 +144,5 @@
     }
   }
 
-  /*.xxx-enter,*/
-  /*.xxx-leave-to {*/
-  /*opacity: 0;*/
-  /*}*/
-
-  /*.xxx-enter-active {*/
-  /*transition: all 1s;*/
-  /*}*/
 </style>
 

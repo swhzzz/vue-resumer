@@ -10,7 +10,7 @@
         <div v-else class="userActions">
           <el-button type="btn" @click="signUpDialogVisible = true">注册</el-button>
           <el-dialog title="注册" :visible.sync="signUpDialogVisible" size="tiny">
-            <el-form >
+            <el-form>
               <el-form-item label="用户名">
                 <el-input type="text" v-model="formData.username" placeholder="请输入用户名" autofocus></el-input>
               </el-form-item>
@@ -25,7 +25,7 @@
           </el-dialog>
           <el-button type="btn" @click="logInDialogVisible = true">登录</el-button>
           <el-dialog title="登录" :visible.sync="logInDialogVisible" size="tiny">
-            <el-form >
+            <el-form>
               <el-form-item label="用户名">
                 <el-input type="text" v-model="formData.username" placeholder="请输入用户名" autofocus></el-input>
               </el-form-item>
@@ -62,10 +62,7 @@
       }
     },
     computed: {
-//      user(){
-//        return this.$store.state.user
-//      },
-      username(){
+      username() {
         return this.$store.state.user.username
       },
       logined() {
@@ -75,32 +72,31 @@
     methods: {
       signUp() {
         this.signUpDialogVisible = false;
-        let {username,password} = this.formData;
+        let {username, password} = this.formData;
         let user = new AV.User();
         user.setUsername(username);
         user.setPassword(password);
-        user.signUp().then(()=>{
+        user.signUp().then(() => {
           this.success();
 //          console.log(user)
           this.$store.commit('setUser', user)
-          console.log(1,user)
+          console.log(1, user)
 //          console.log(store.state.user.username)
-        },(error)=> {
-          this.errorMsg=getErrorMessage(error);
+        }, (error) => {
+          this.errorMsg = getErrorMessage(error);
           this.fail(this.errorMsg)
         });
 
       },
       logIn(user) {
-        this.logInDialogVisible=false;
-        let {username,password} = this.formData;
-        AV.User.logIn(username,password).then(()=>{
+        this.logInDialogVisible = false;
+        let {username, password} = this.formData;
+        AV.User.logIn(username, password).then(() => {
           this.$store.commit('setUser', user)
-        },(error)=> {
-          this.errorMsg=getErrorMessage(error);
+        }, (error) => {
+          this.errorMsg = getErrorMessage(error);
           this.fail(this.errorMsg)
         });
-
       },
       logOut() {
         AV.User.logOut();
@@ -120,10 +116,10 @@
           type: 'warning'
         });
       },
-      preview(){
-        this.$store.state.topBarShow=false;
-        this.$store.state.editorShow=false;
-        this.$store.state.exitBtnShow=true;
+      preview() {
+        this.$store.state.topBarShow = false;
+        this.$store.state.editorShow = false;
+        this.$store.state.exitBtnShow = true;
       }
     }
   }

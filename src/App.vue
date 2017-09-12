@@ -10,7 +10,7 @@
         <ResumeEditor v-if="editorShow"></ResumeEditor>
       </transition>
       <transition name="slide-right">
-        <ResumePreview v-if="previewShow" ></ResumePreview>
+        <ResumePreview v-if="previewShow"></ResumePreview>
       </transition>
     </main>
   </div>
@@ -18,8 +18,8 @@
 
 <script>
   import 'animate.css'
-  import 'normalize.css/normalize.css'
   import './assets/reset.css'
+  import 'normalize.css/normalize.css'
 
   import Topbar from './components/Topbar'
   import ResumeEditor from './components/ResumeEditor'
@@ -35,7 +35,7 @@
     name: 'app',
     store,
     computed: {
-      ...mapState(['topBarShow', 'editorShow', 'previewShow','xx'])
+      ...mapState(['topBarShow', 'editorShow', 'previewShow'])
     },
     components: {
       Topbar,

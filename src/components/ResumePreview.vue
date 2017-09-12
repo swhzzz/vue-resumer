@@ -147,7 +147,7 @@
       transform: translateY(-50px);
     }
     .exitPreviewBtnFade-enter-active,
-    .exitPreviewBtnFade-leave-active{
+    .exitPreviewBtnFade-leave-active {
       transition: all 1s;
     }
   }
