@@ -43,11 +43,6 @@
       ResumePreview
     },
     created: function () {
-      setTimeout(() => {
-        this.$store.state.topBarShow = true;
-        this.$store.state.editorShow = true;
-        this.$store.state.previewShow = true;
-      }, 1);
       document.body.insertAdjacentHTML('afterbegin', icons);//插入icons，放在body标签的首部
       let state = localStorage.getItem('state');//获取数据
       if (state) {
@@ -55,6 +50,14 @@
       }
       this.$store.commit('initState', state);
       this.$store.commit('setUser', getAVUser())
+      this.$store.state.topBarShow = false;
+      this.$store.state.editorShow = false;
+      this.$store.state.previewShow = false;
+      setTimeout(() => {
+        this.$store.state.topBarShow = true;
+        this.$store.state.editorShow = true;
+        this.$store.state.previewShow = true;
+      }, 1);
     }
   }
 </script>
