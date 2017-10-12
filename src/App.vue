@@ -28,12 +28,10 @@
   import AV from './lib/leancloud'
   import getAVUser from './lib/getAVUser'
 
-  import store from './store/index'
   import {mapState, mapMutations} from 'vuex'
 
   export default {
     name: 'app',
-    store,
     computed: {
       ...mapState(['topBarShow', 'editorShow', 'previewShow'])
     },
@@ -50,13 +48,9 @@
       }
       this.$store.commit('initState', state);
       this.$store.commit('setUser', getAVUser())
-      this.$store.state.topBarShow = false;
-      this.$store.state.editorShow = false;
-      this.$store.state.previewShow = false;
+      this.$store.commit('initShow')
       setTimeout(() => {
-        this.$store.state.topBarShow = true;
-        this.$store.state.editorShow = true;
-        this.$store.state.previewShow = true;
+        this.$store.commit('showAll')
       }, 1);
     }
   }

@@ -78,10 +78,7 @@
         user.setPassword(password);
         user.signUp().then(() => {
           this.success();
-//          console.log(user)
           this.$store.commit('setUser', user)
-          console.log(1, user)
-//          console.log(store.state.user.username)
         }, (error) => {
           this.errorMsg = getErrorMessage(error);
           this.fail(this.errorMsg)
@@ -117,9 +114,7 @@
         });
       },
       preview() {
-        this.$store.state.topBarShow = false;
-        this.$store.state.editorShow = false;
-        this.$store.state.exitBtnShow = true;
+        this.$store.commit('preview')
       }
     }
   }

@@ -53,13 +53,13 @@
     methods: {
       add() {
         let type = this.currentTab,
-          tabObj = this.resume[type][0],//获取company,school里面的对象
+          tabObj = this.resume[type][0], // 拷贝一份，然后清空，push进state
           keys = Object.keys(tabObj);
         let obj = {};
         keys.map((item) => {
           obj[item] = ''
         })
-        this.resume[type].push(obj)
+        this.$store.commit('xx', {type, obj})
       },
       handleDelete(index) {
         this.$store.commit('deleteItem', index)
@@ -115,6 +115,9 @@
         position: absolute;
         top: 0;
         right: 0;
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
     .panels {
