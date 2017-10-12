@@ -8,7 +8,7 @@ const mutations = {
     state.currentTab = value;
     localStorage.setItem('state', JSON.stringify(state))
   },
-  xx(state,{type,obj}){
+  changeResume(state,{type,obj}){
     state.resume[type].push(obj)
   },
   updateResume(state, {path, value}) {

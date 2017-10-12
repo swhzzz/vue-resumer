@@ -40,7 +40,7 @@
   export default {
     name: 'ResumeEditor',
     computed: {
-      ...mapState(['resume', 'svgIds', 'shows']),
+      ...mapState(['resume', 'svgIds']),
       currentTab: {
         get () {
           return this.$store.state.currentTab
@@ -59,7 +59,7 @@
         keys.map((item) => {
           obj[item] = ''
         })
-        this.$store.commit('xx', {type, obj})
+        this.$store.commit('changeResume', {type, obj})
       },
       handleDelete(index) {
         this.$store.commit('deleteItem', index)
