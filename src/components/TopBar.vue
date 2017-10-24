@@ -39,7 +39,6 @@
             </span>
           </el-dialog>
         </div>
-        <el-button @click="preview" class="btn" type="primary">预览</el-button>
       </div>
     </div>
   </div>
@@ -112,9 +111,6 @@
           message: `${msg}:(`,
           type: 'warning'
         });
-      },
-      preview() {
-        this.$store.commit('preview')
       }
     }
   }
@@ -145,7 +141,7 @@
   .actions {
     display: flex;
     .userActions {
-      margin-right: 3em;
+      margin-right: 5em;
     }
   }
 </style>

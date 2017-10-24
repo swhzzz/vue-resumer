@@ -55,9 +55,6 @@
         </tr>
       </table>
     </section>
-    <transition name="exitPreviewBtnFade">
-      <el-button @click="exit" type="primary" class="btn exit" v-if="exitBtnShow">退出预览</el-button>
-    </transition>
   </div>
 </template>
 
@@ -67,12 +64,7 @@
   export default {
     name: 'ResumePreview',
     computed: {
-      ...mapState(['resume', 'exitBtnShow'])
-    },
-    methods: {
-      exit() {
-        this.$store.commit('exitPreview')
-      }
+      ...mapState(['resume'])
     }
   }
 </script>

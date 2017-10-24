@@ -15,18 +15,18 @@
           <div class="item-wrap" v-for="(subItem,i) in item">
             <div v-for="(value,key,index) in subItem">
               <label>{{key}}</label>
-              <input type="text" :value="value"
-                     @input="changeResume(`${currentTab}.${i}.${key}`,$event.target.value)">
+              <el-input type="text" :value="value"
+                        @input="changeResume(`${currentTab}.${i}.${key}`,$event)"></el-input>
             </div>
             <i class="del-btn el-icon-circle-cross" v-if="item.length>1" @click="handleDelete(i)"></i>
             <hr>
           </div>
-          <el-button @click="add()" type="primary">add</el-button>
+          <el-button @click="add()" type="primary">新增</el-button>
         </div>
         <div v-else>
           <div v-for="(value,key) in item">
             <label>{{key}}</label>
-            <input type="text" :value="value" @input="changeResume(`${currentTab}.${key}`,$event.target.value)">
+            <el-input type="text" :value="value" @input="changeResume(`${currentTab}.${key}`,$event)"></el-input>
           </div>
         </div>
       </li>
@@ -131,13 +131,13 @@
             display: block;
             margin-bottom: 16px;
           }
-          input[type="text"] {
-            height: 40px;
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25)
-          }
+          /*input[type="text"] {*/
+            /*height: 40px;*/
+            /*width: 100%;*/
+            /*padding: 8px;*/
+            /*border: 1px solid #ddd;*/
+            /*box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25)*/
+          /*}*/
         }
         hr {
           border-color: #eee;

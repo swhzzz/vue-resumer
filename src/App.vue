@@ -10,14 +10,14 @@
         <ResumeEditor v-if="editorShow"></ResumeEditor>
       </transition>
       <transition name="slide-right">
-        <ResumePreview v-if="previewShow"></ResumePreview>
+        <ResumePreview v-if="previewShow" :class="[exitBtnShow ? 'posCls': '']"></ResumePreview>
       </transition>
     </main>
+    <el-button v-if="previewShow" @click="togglePreviewShow" class="btn previewBtn" type="primary" v-html="btnText"></el-button>
   </div>
 </template>
 
 <script>
-  import 'animate.css'
   import './assets/reset.css'
   import 'normalize.css/normalize.css'
 
@@ -28,12 +28,15 @@
   import AV from './lib/leancloud'
   import getAVUser from './lib/getAVUser'
 
-  import {mapState, mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'app',
     computed: {
-      ...mapState(['topBarShow', 'editorShow', 'previewShow'])
+      ...mapState(['topBarShow', 'editorShow', 'previewShow', 'exitBtnShow']),
+      btnText(){
+        return this.exitBtnShow ? '退出预览' : '预览'
+      }
     },
     components: {
       Topbar,
@@ -52,6 +55,15 @@
       setTimeout(() => {
         this.$store.commit('showAll')
       }, 1);
+    },
+    methods: {
+      togglePreviewShow() {
+        if(!this.exitBtnShow){
+          this.$store.commit('preview')
+        }else {
+          this.$store.commit('exitPreview')
+        }
+      }
     }
   }
 </script>
@@ -85,10 +97,24 @@
   }
 
   #resumePreview {
-    /*width: 61.66667%;*/
-    background: #777;
     flex: 1;
+    background: #777;
     margin-left: 16px;
+  }
+
+  .previewBtn {
+    position: fixed;
+    top: 14px;
+    right: 16px;
+  }
+
+  .posCls {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 61.667%;
+    height: 94vh;
+    transform: translate(-50%, -50%);
   }
 
   .slide-top-enter,
