@@ -9,11 +9,10 @@
       <transition name="slide-left">
         <ResumeEditor v-if="editorShow"></ResumeEditor>
       </transition>
-      <transition name="slide-right">
-        <ResumePreview v-if="previewShow" :class="[exitBtnShow ? 'posCls': '']"></ResumePreview>
-      </transition>
+      <ResumePreview v-if="previewShow" :class="[exitBtnShow ? 'posCls': '']"></ResumePreview>
     </main>
-    <el-button v-if="previewShow" @click="togglePreviewShow" class="btn previewBtn" type="primary" v-html="btnText"></el-button>
+    <el-button v-if="previewShow" @click="togglePreviewShow" class="btn previewBtn" type="primary"
+               v-html="btnText"></el-button>
   </div>
 </template>
 
@@ -34,7 +33,7 @@
     name: 'app',
     computed: {
       ...mapState(['topBarShow', 'editorShow', 'previewShow', 'exitBtnShow']),
-      btnText(){
+      btnText() {
         return this.exitBtnShow ? '退出预览' : '预览'
       }
     },
@@ -58,9 +57,9 @@
     },
     methods: {
       togglePreviewShow() {
-        if(!this.exitBtnShow){
+        if (!this.exitBtnShow) {
           this.$store.commit('preview')
-        }else {
+        } else {
           this.$store.commit('exitPreview')
         }
       }
@@ -123,11 +122,7 @@
     transform: translateY(-64px);
   }
 
-  .slide-top-enter-active {
-    transition: all 1s 1s;
-  }
-
-  .slide-top-leave-active {
+  .slide-top-enter-active, .slide-top-leave-active {
     transition: all 1s;
   }
 
@@ -137,25 +132,7 @@
     transform: translateX(-20%);
   }
 
-  .slide-left-enter-active {
-    transition: all 1s;
-  }
-
-  .slide-left-leave-active {
-    transition: all 1s;
-  }
-
-  .slide-right-enter,
-  .slide-right-leave-to {
-    opacity: 0;
-    transform: translateX(20%);
-  }
-
-  .slide-right-enter-active {
-    transition: all 1s .5s;
-  }
-
-  .slide-right-leave-active {
+  .slide-left-enter-active, .slide-left-leave-active {
     transition: all 1s;
   }
 </style>

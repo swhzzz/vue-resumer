@@ -15,21 +15,20 @@ const state = {
         ],
         profile: { 'name': '沈文豪', 'title': '前端工程师', 'city': '杭州', 'birth': '1994-7-27' },
         workHistory: [
-            { 'company': '工作经历1', 'content': '内容描述' },
-            { 'company': '工作经历2', 'content': '内容描述' }
+            { 'company': '', 'content': '' }
         ],
         education: [
-            { 'school': '学校名称', 'content': '学校描述' }
+            { 'school': '', 'content': '' }
         ],
         projects: [
-            { 'name': '项目名称', 'content': '项目介绍' }
+            { 'name': '', 'content': '' }
         ],
         awards: [
-            { 'name': '获奖名称', 'content': '连续N次谢谢惠顾' }
+            { 'name': '', 'content': '' }
         ],
         contacts: [
-            { 'contact': 'phone', 'content': '15757821491' },
-            { 'contact': 'qq', 'content': '443878051' }
+            { 'contact': '手机', 'content': '15757821491' },
+            { 'contact': 'QQ', 'content': '443878051' }
         ]
     }
 }
